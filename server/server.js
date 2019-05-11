@@ -22,9 +22,6 @@ app.listen(port, (err) => {
 
 
 //----- Routes -----//
-		app.route('/').get((req,res) => {
-			res.sendFile('test.html', {root: __dirname});
-		});
 
 //--- Collezione (POST non implementata)
 // GET
@@ -127,8 +124,6 @@ app.route('/jtr/:name').post((req,res) => {
 	//---- [TO-DO] salva file psw come "download" in mount_dirs ////////////////////////////////////////////////////
 	
 	//---- [TO-DO] preleva dal post i parametri da passare a john (cmd) ////////////////////////////////////////////////////
-
-	//---- [TO-DO] si potrebbe consentire all'utente di effettuare l'upload di un dizionario  ////////////////////////////////////////////////////
 
 	let name = req.params.name;	
 	let in_dir = __dirname+'/mount_dirs/in/'+name;
