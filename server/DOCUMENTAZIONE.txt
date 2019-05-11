@@ -1,0 +1,6 @@
+
+	Note sul server in NodeJS
+
+- Sto usando https://malcoded.com/posts/angular-backend-express/ come riferimento.
+- le dipendenze sono: express body-parser
+
