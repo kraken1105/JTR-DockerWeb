@@ -1,39 +1,38 @@
 # JTR-DockerWeb
 
 Il progetto è suddiviso in due parti:
-- backend NodeJS/Express (API REST): consente l'esecuzione di container docker con l'image 'John the Ripper', noto tool di cracking di psw ( https://hub.docker.com/r/knsit/johntheripper ). L'interfacciamento con docker avviene mediante le API mydockerjs ( https://github.com/giper45/docker-js ).
-- [TO-DO] frontend AngularJS ...
+- backend NodeJS/Express (espone API REST): consente l'esecuzione di container docker con l'image 'John the Ripper', noto tool di cracking di psw ( https://hub.docker.com/r/knsit/johntheripper ). L'interfacciamento con docker avviene mediante le API mydockerjs ( https://github.com/giper45/docker-js ).
+- frontend Angular: consente l'interfacciamento con il backend.
 
 ## Getting Started
 
-Per testare il progetto (per il momento solo il backend), clonare la repo
+Per testare il progetto, clonare la repo
 ```
 git clone https://github.com/kraken1105/JTR-DockerWeb.git
 ```
 
-Quindi installare le dipendenze
+Quindi installare le dipendenze del server ed avviarlo:
 ```
 cd server
 sudo npm install
+sudo node index.js
 ```
+
+Allo stesso modo installare le dipendenze del client ed avviarlo:
+```
+cd client
+sudo npm install
+ng serve
+```
+
+L'interfaccia è raggiungibile all'indirizzo
+```
+localhost:4200/
+```
+
 
 ### Prerequisites
 
-Il prerequisito richiesto è il docker engine.
+E' richiesta la presenza del docker engine.
 
-
-## Examples
-
-Avviare il server backend:
-```
-sudo node index.js
-```
-ed utilizzare un client come Postman per effettuare chiamate HTTP REST ai path
-```
-localhost:3000/jtr/
-```
-oppure
-```
-localhost:3000/jtr/:name
-```
 
