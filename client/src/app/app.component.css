@@ -1,0 +1,52 @@
+
+/*
+@brand-primary: darken(#428bca, 6.5%); // #337ab7
+@brand-success: #5cb85c;
+@brand-info:    #5bc0de;
+@brand-warning: #f0ad4e;
+@brand-danger:  #d9534f;*/
+
+.header {
+    text-align: center;
+    background-color: floralwhite;
+}
+
+.header h1 {
+    color: #337ab7;
+    padding: 10px;
+}
+
+.info a {
+    color: #337ab7;
+    font-weight: bold;
+}
+
+nav {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+    margin-top: 25px;
+  }
+
+nav a {
+    display: inline-block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+nav a:hover {
+    background-color: #337ab7;
+    color: white;
+}
+
+.content {
+    padding: 20px;
+    padding-bottom: 50%;
+
+    height:auto; background-size:cover; width:auto;
+    background: #3379b742;
+}

@@ -1,0 +1,38 @@
+
+div {
+    width: 70%;
+    margin: auto;
+    margin-bottom: 20 px;
+}
+
+nav {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+    margin-top: 25px;
+    text-align: center;
+}
+
+nav a {
+    display: inline-block;
+    color: white;
+    text-align: center;
+    padding: 8px 10px;
+    text-decoration: none;
+}
+
+nav a:hover {
+    background-color: #ec8a00;
+    cursor: pointer;
+    color: white;
+}
+
+ul {
+    padding: 25px;
+    margin-bottom: 50px;
+    background-color: floralwhite;
+    list-style-type: none;
+}
+

@@ -1,0 +1,17 @@
+
+<div>
+  <nav *ngIf="listaContainer?.length > 1">
+    <a (click)="getListaContainer()">Aggiorna tutti</a>
+    <a (click)="putListaContainer()">Ferma tutti</a>
+    <a (click)="delListaContainer()">Cancella tutti</a>
+  </nav>
+
+  <ul *ngIf="listaContainer?.length > 0">
+    <li *ngFor="let container of listaContainer">
+      <app-container (updateListNow)="getListaContainer()" [container]="container"></app-container>
+	  </li>
+  </ul>
+
+  <p *ngIf="listaContainer?.length == 0">Nessun container trovato. <a routerLink="/nuovoContainer">
+    Clicca qui</a> o nella barra in alto per aggiungere un nuovo container.</p>
+</div>

@@ -1,0 +1,37 @@
+<div class="cont">
+
+  <h3>Aggiungi container</h3>
+
+  <form enctype="multipart/form-data" [formGroup]="myForm">
+    <table>
+      <tr>
+        <td><label for="txtName">Nome:</label></td>
+        <td><input type="text" formControlName="txtName"></td>
+      </tr>
+      <tr>
+        <td><label for="selectMod">Attack Mode:</label></td>
+        <td><select formControlName="selectMod" (change)="updateForm()">
+            <option value="wordlist">Wordlist</option>
+            <option value="single">Single crack</option>
+            <option value="incremental">Incremental</option>
+            <option value="external">External</option>
+          </select></td>
+      </tr>
+      <tr [hidden]="hideDictUpload">
+        <td><label for="fileDictionary"><i>Dizionario (opzionale)</i></label></td>
+        <td><input (change)="fileChange($event,1)" type="file" formControlName="fileDictionary"></td>
+      </tr>
+      <tr>
+        <td><label for="filePswUnshadowed">File delle password unshadowed:</label></td>
+        <td><input (change)="fileChange($event,0)" type="file" formControlName="filePswUnshadowed"></td>
+      </tr>
+    </table>
+    
+    <div class="buttons">
+      <button class="btnDel"  type="reset">Reset</button>
+      <button class="btnSend" (click)="postContainer()" [hidden]="!myForm.valid" >Invia</button>
+      <span  class="infoSend" [hidden]="myForm.valid">Tutti i dati sono obbligatori!</span>
+    </div>
+  </form>
+
+</div>
