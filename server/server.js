@@ -134,7 +134,7 @@ app.route('/jtr/:name').get((req,res) => {
 app.route('/jtr/:name').post(multipartMiddleware, (req,res) => {
 	
 	console.log("    ["+Date.now()+"] POST /jtr/"+req.params.name);
-		/* console.log(req.body, req.files);
+		/*console.log(req.body, req.files);
   	var file = req.files["filePswUnshadowed"];
   	console.log(req.files.hasOwnProperty('fileDictionary')); */
 	  
@@ -159,12 +159,21 @@ app.route('/jtr/:name').post(multipartMiddleware, (req,res) => {
 	fse.mkdirSync(out_dir); 		// creo la cartella da montare in out
 	fse.chmodSync(out_dir,0o777);	// cambio i permessi così che il container possa accedere in scrittura
 	// inizializzo la cartella di input...
-	fse.copySync(__dirname+'/mount_dirs/default_in', in_dir);									// ...con i file di default	
+	fse.copySync(__dirname+'/mount_dirs/default_in', in_dir);															// ...con i file di default										
 	fse.renameSync(__dirname+"/"+req.files["filePswUnshadowed"].path, in_dir+'/psw');			// ...con il file delle psw
 	if(req.body.selectMod == "wordlist" && req.files.hasOwnProperty('fileDictionary'))
-		fse.renameSync(__dirname+"/"+req.files["fileDictionary"].path, in_dir+'/password.lst');	// ...con l'eventuale dizionario	
+		fse.renameSync(__dirname+"/"+req.files["fileDictionary"].path, in_dir+'/password.lst');	// ...con l'eventuale dizionario
 	
-	jtrDocker.runJtR_withName(name, in_dir, out_dir,
+	// costruisco il comando per avviare john con i parametri desiderati
+	let cmdJohn = 'john '+req.body.otherParams;
+	if(req.body.selectMod=='wordlist')
+		cmdJohn += ' --wordlist=/in/password.lst /in/psw > /home/john/out_console.txt';
+	else
+		cmdJohn += ' --'+req.body.selectMod+' /in/psw > /home/john/out_console.txt';
+	fse.appendFileSync( in_dir+'/crack.sh', cmdJohn, 'utf8'); // appendo il comando allo script lanciato di default
+	
+	// run
+	jtrDocker.runJtR({name:name, mount_in:in_dir, mount_out:out_dir}, 
 		function(err, data) {if(err) {
 			console.log("Some err:") 
 		  	console.log(data)

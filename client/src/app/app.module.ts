@@ -9,13 +9,15 @@ import { AppComponent } from './app.component';
 import { ContainerComponent } from './container/container.component';
 import { ContainerListaComponent } from './container-lista/container-lista.component';
 import { ContainerFormComponent } from './container-form/container-form.component';
+import { ContainerFormGenericComponent } from './container-form-generic/container-form-generic.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ContainerComponent,
     ContainerListaComponent,
-    ContainerFormComponent
+    ContainerFormComponent,
+    ContainerFormGenericComponent
   ],
   imports: [
     RouterModule.forRoot([
@@ -26,6 +28,10 @@ import { ContainerFormComponent } from './container-form/container-form.componen
       {
         path: 'nuovoContainer',
         component: ContainerFormComponent
+      },
+      {
+        path: 'nuovoContainerGenerico',
+        component: ContainerFormGenericComponent
       }
     ]),
     HttpClientModule,

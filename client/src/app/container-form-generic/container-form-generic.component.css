@@ -1,0 +1,73 @@
+
+.cont {
+    width: 70%;
+    margin: auto;
+    padding: 25px;
+    margin-bottom: 50px;
+    background-color: floralwhite;
+}
+
+h3 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* console */
+.console {
+    font-family:Courier bold;
+    color: rgb(230, 230, 230);
+    background: #000000;
+    border: 3px double rgb(230, 230, 230);
+    padding: 2px;
+    width:100%
+  }
+
+/* tabella */
+table {width: 100%;}
+td {vertical-align: middle}
+
+.infoSend {
+  color:red;
+  font-weight: bold;
+  margin-left: 10px;
+}
+
+.buttons {
+  margin-top: 20px;
+  text-align:center;
+}
+
+/* btnReset */
+.btnDel {
+  background-color: red;
+  color: white;
+  padding: 5px 15px;
+  text-decoration: none;
+  text-transform: uppercase;
+  border-radius: 5px;
+}
+.btnDel:hover {
+  background-color: #ce0606;
+  cursor: pointer;
+}
+.btnDel:active {
+  background-color: #9e2525;
+}
+  
+/* btnSend */
+.btnSend {
+  background-color: green;
+  color: white;
+  padding: 5px 15px;
+  text-decoration: none;
+  text-transform: uppercase;
+  border-radius: 5px;
+  margin-left: 10px;
+}
+.btnSend:hover {
+  background-color: rgb(2, 83, 2);
+  cursor: pointer;
+}
+.btnSend:active {
+  background-color: rgb(0, 58, 0);
+}

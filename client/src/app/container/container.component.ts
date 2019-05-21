@@ -51,6 +51,7 @@ export class ContainerComponent implements OnInit {
         if(this.container.State == 'exited') {
           this.isExited = true;
           this.observableRef.unsubscribe();
+          this.updateListNow.emit();
         } else this.container = result;
       }
     );

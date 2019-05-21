@@ -14,16 +14,19 @@
             <option value="wordlist">Wordlist</option>
             <option value="single">Single crack</option>
             <option value="incremental">Incremental</option>
-            <option value="external">External</option>
           </select></td>
       </tr>
       <tr [hidden]="hideDictUpload">
-        <td><label for="fileDictionary"><i>Dizionario (opzionale)</i></label></td>
+        <td><label for="fileDictionary"><i>Dizionario (opzionale):</i></label></td>
         <td><input (change)="fileChange($event,1)" type="file" formControlName="fileDictionary"></td>
       </tr>
       <tr>
         <td><label for="filePswUnshadowed">File delle password unshadowed:</label></td>
         <td><input (change)="fileChange($event,0)" type="file" formControlName="filePswUnshadowed"></td>
+      </tr>
+      <tr>
+        <td><label for="otherParams"><i>Ulteriori parametri (opzionale):</i></label></td>
+        <td><input type="text" formControlName="otherParams"></td>
       </tr>
     </table>
     

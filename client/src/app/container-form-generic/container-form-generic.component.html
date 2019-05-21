@@ -1,0 +1,29 @@
+<div class="cont">
+
+  <h3>Aggiungi container</h3>
+  <p style="text-align: center">Tutti i container avviati tramite questa form verranno lanciati in Docker con l'opzione <span class="console">--rm</span></p>
+
+  <form enctype="multipart/form-data" [formGroup]="myForm">
+    <table>
+      <tr>
+        <td><label for="txtName">Nome del container:</label></td>
+        <td><input type="text" formControlName="txtName"></td>
+      </tr>
+      <tr>
+        <td><label for="txtImage">Image da lanciare:</label></td>
+        <td><input type="text" formControlName="txtImage"></td>
+      </tr>
+      <tr>
+        <td><label for="txtCmdContainer">Command line (del container):</label></td>
+        <td><input class="console" type="text" formControlName="txtCmdContainer"></td>
+      </tr>
+    </table>
+    
+    <div class="buttons">
+      <button class="btnDel"  type="reset">Reset</button>
+      <button class="btnSend" (click)="postContainer()" [hidden]="!myForm.valid" >Invia</button>
+      <span  class="infoSend" [hidden]="myForm.valid">Tutti i dati sono obbligatori!</span>
+    </div>
+  </form>
+
+</div>

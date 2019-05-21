@@ -25,7 +25,8 @@ export class ContainerFormComponent implements OnInit {
       txtName: ["", Validators.required],
       selectMod: ["wordlist", Validators.required],
       fileDictionary: ["", ],
-      filePswUnshadowed: ["", Validators.required]
+      filePswUnshadowed: ["", Validators.required],
+      otherParams: ["--format=sha512crypt ", ]
     })
   }
 
@@ -37,11 +38,13 @@ export class ContainerFormComponent implements OnInit {
     // appendo i dati relativi al container
     formData.append("Name", this.myForm.controls["txtName"].value);
     formData.append("selectMod", this.myForm.controls["selectMod"].value);
+    formData.append("otherParams", this.myForm.controls["otherParams"].value);
+    
     // appendo il file delle password
     formData.append("filePswUnshadowed", this.filePswUnshadowed, this.filePswUnshadowed.name);
     // appendo il file del dizionario se la modalità è wordlist e se esso è stato fornito
     if(this.myForm.controls["selectMod"].value=="wordlist" && this.myForm.controls["fileDictionary"].dirty)
-    formData.append("fileDictionary", this.fileDictionary, this.fileDictionary.name);
+      formData.append("fileDictionary", this.fileDictionary, this.fileDictionary.name);
 
     this.containerRestService.postContainer(this.myForm.controls["txtName"].value, formData)
       .subscribe((result) => {

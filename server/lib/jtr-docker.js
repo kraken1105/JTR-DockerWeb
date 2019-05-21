@@ -5,11 +5,33 @@ const docker = require ('mydockerjs').docker;
 module.exports = {
   docker,
 
+  myRun: function (image, flagsParams, callback, cmdContainer) {
+    /* Parametri gestiti:
+     *    remove: --rm 
+     *    mount_sys , mount_cont: rispettivamente percorso di mount del server e mappatura nel container
+     */
+    
+    let myFlags = '';
+    if (params.remove)
+      { myFlags += ' --rm '; }
+    if (flagsParams.mount_sys && lagsParams.mount_cont)
+      { myFlags += ` -v ${flagsParams.mount_sys}:${flagsParams.mount_cont} ` }
+    
+    flagsParams = _.omit(flagsParams, 'remove', 'mount_sys', 'mount_cont');
+
+    // Costruisco i parametri necessari all'interfacciamento con mydockerjs
+    let first = `${myFlags} ${image}`;
+    flagsParams.cmd = cmdContainer;
+    
+    // Run
+    return docker.run(`${first}`, callback, flagsParams);
+  },
+
   /** - viene utilizzata di default la docker image 'knsit/johntheripper'
   * - nei paramsInput è possibile specificare i mount point di input e output dell'host,
   *   mappati rispettivamente in /in e /home/john/ del container.
   */
-  runJtR: function (flagsDocker, callback, cmdDocker) {
+  runJtR: function (flagsDocker, callback) {
     const flagsProto = {
       detached: true,
     };
@@ -25,14 +47,6 @@ module.exports = {
     if (flagsParams.mount_out) { flags += ` -v ${flagsParams.mount_out}:/home/john/ ` }
     else { return (true, 'specificare un mount_out') }
     flagsParams = _.omit(flagsParams, 'mount_in', 'mount_out');
-
-    // Appendo ulteriori parametri da passare al terminale del container in aggiunta allo script di default che avvia jtr
-    if(cmdDocker) { cmd = cmd +" && "+ cmdDocker; }
-
-    /******** [TO-DO] rimuovere dallo script crack.sh il comando 
-     *          john --format=sha512crypt --wordlist=/in/password.lst /in/psw > /home/john/out_console.txt
-     *        e costruirlo in base ai parametri passati dall'utente (magari nel chiamante)
-     */
  
     // Costruisco i parametri necessari all'interfacciamento con mydockerjs
     let first = `${flags} ${image}`;
@@ -40,11 +54,11 @@ module.exports = {
     
     // Run
     return docker.run(`${first}`, callback, flagsParams);
-  },
+  }/* ,
 
   runJtR_withName: function (name, in_dir, out_dir, callback) {
     return this.runJtR({name:name, mount_in:in_dir, mount_out:out_dir}, callback);
-  }
+  } */
 
 
 }
