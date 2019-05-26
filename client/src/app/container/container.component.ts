@@ -1,8 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { interval } from 'rxjs';
+import { flatMap } from 'rxjs/operators';
 import { Container } from './container';
 import { ContainerRestService } from '../container-rest.service';
-import { interval, observable } from 'rxjs';
-import { flatMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-container',
@@ -15,7 +15,7 @@ export class ContainerComponent implements OnInit {
   @Input() container: Container;
   @Output() updateListNow = new EventEmitter<{}>();
   isExited: boolean = true;
-  observableRef;
+  pollingRef;
 
   /**
    * Costruttore, inietto il servizio che fornisce le API REST
@@ -27,7 +27,7 @@ export class ContainerComponent implements OnInit {
    * se il container è ancora in esecuzione.
    */
   ngOnInit() {
-    if(!(this.container.State == 'exited')) {
+    if(this.container.running) {
       this.pollingContainer();
       this.isExited = false;
     }
@@ -37,34 +37,39 @@ export class ContainerComponent implements OnInit {
    * Richiamata alla Destroy del componente, ferma il polling se ancora attivo.
    */
   ngOnDestroy() {
-    if(this.observableRef)
-      this.observableRef.unsubscribe();
+    if(this.pollingRef)
+      this.pollingRef.unsubscribe();
   }
 
   /**
    * Avvia un polling con GET/:name (ogni 2 secondi).
    */
   pollingContainer() {
-    this.observableRef = interval(2000).pipe(
-      flatMap( () => this.containerRestService.getContainer(this.container.Name) )
-    ).subscribe(result => {        
-        if(this.container.State == 'exited') {
+    this.pollingRef = interval(2000).pipe(
+      flatMap( () => this.containerRestService.getContainer(this.container.name) )
+    ).subscribe(result => 
+      {        
+        if(!this.container.running) {
           this.isExited = true;
-          this.observableRef.unsubscribe();
-          this.updateListNow.emit();
-        } else this.container = result;
+          this.pollingRef.unsubscribe();
+        } else 
+          this.container = result;
       }
     );
   }
 
   delContainer() {
-    this.containerRestService.delContainer(this.container.Name)
-      .subscribe(result => {console.log("DEL "+this.container.Name+" "+result); this.updateListNow.emit();});
+    this.containerRestService.delContainer(this.container.name)
+      .subscribe(result => 
+        {
+          console.log("DEL "+this.container.name+" "+result);
+          this.updateListNow.emit(); // segnala al container-lista-component di aggiornare la lista di container
+        });
   }
 
   putContainer() {
-    this.containerRestService.putContainer(this.container.Name)
-      .subscribe(result => {console.log("PUT "+this.container.Name+" "+result); this.updateListNow.emit();});
-  }  
+    this.containerRestService.putContainer(this.container.name)
+      .subscribe(result => console.log("PUT "+this.container.name+" "+result));
+  }
 
 }

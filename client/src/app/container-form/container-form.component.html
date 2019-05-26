@@ -1,37 +1,64 @@
 <div class="cont">
 
   <h3>Aggiungi container</h3>
+  <p style="text-align: center">Tutti i container verranno lanciati in Docker con l'opzione <span class="console">--rm</span></p>
 
   <form enctype="multipart/form-data" [formGroup]="myForm">
     <table>
       <tr>
-        <td><label for="txtName">Nome:</label></td>
+        <td><label for="txtName">Nome del container:</label></td>
         <td><input type="text" formControlName="txtName"></td>
       </tr>
+      
       <tr>
-        <td><label for="selectMod">Attack Mode:</label></td>
-        <td><select formControlName="selectMod" (change)="updateForm()">
-            <option value="wordlist">Wordlist</option>
-            <option value="single">Single crack</option>
-            <option value="incremental">Incremental</option>
+        <td><label for="selImage">Docker image:</label></td>
+        <td><select formControlName="selImage" (change)="onSelImageChange()">
+            <option *ngFor="let image of myConfig.images" value="{{image.name}}">{{image.name}}</option>
           </select></td>
       </tr>
-      <tr [hidden]="hideDictUpload">
-        <td><label for="fileDictionary"><i>Dizionario (opzionale):</i></label></td>
-        <td><input (change)="fileChange($event,1)" type="file" formControlName="fileDictionary"></td>
+
+      <tr *ngIf="showTxtImageCustom">
+        <td><label for="txtImageCustom">Specifica la docker image custom:</label></td>
+        <td><input type="text" formControlName="txtImageCustom"></td>
+      </tr>   
+      
+      <tr *ngIf="existClientPresentForImage">
+        <td><label for="selCmdPreset">Cmd preset:</label></td>
+        <td><select formControlName="selCmdPreset" (change)="onCmdPresetChange()">
+            <option *ngFor='let cmdPreset of currentSelectedImage["client-preset"]["cmd-presets"]' value="{{cmdPreset.name}}">{{cmdPreset.name}}</option>
+          </select></td>
       </tr>
+
+      <tr> <td><br/></td> </tr>
+
       <tr>
-        <td><label for="filePswUnshadowed">File delle password unshadowed:</label></td>
-        <td><input (change)="fileChange($event,0)" type="file" formControlName="filePswUnshadowed"></td>
+        <td><label for="txtCmd">Cmd del container:</label></td>
+        <td><input class="console" type="text" formControlName="txtCmd" value=""></td>
       </tr>
+
+      <tr> <td><br/></td> </tr>
+
       <tr>
-        <td><label for="otherParams"><i>Ulteriori parametri (opzionale):</i></label></td>
-        <td><input type="text" formControlName="otherParams"></td>
+        <td><label for="txtPathMountIn">Path di mount-in nel container <i>(opzionale):</i></label></td>
+        <td><input type="text" formControlName="txtPathMountIn" value=""></td>
+      </tr>
+
+      <tr>
+        <td><label for="fileToAdd">Aggiungi file nel path di mount-in <i>(opzionale):</i></label></td>
+        <td><input (change)="fileChange($event)" type="file" formControlName="fileToAdd"></td>
+      </tr>
+
+      <tr *ngIf="numFileToUpload>0">
+        <td>File aggiunti nel path di mount-in:</td>
+      </tr>
+
+      <tr *ngFor="let file of filesToUpload">
+        <td>&rarr; {{file.name}}</td>
       </tr>
     </table>
     
     <div class="buttons">
-      <button class="btnDel"  type="reset">Reset</button>
+      <button class="btnDel"  (click)="resetContainer()" type="reset">Reset</button>
       <button class="btnSend" (click)="postContainer()" [hidden]="!myForm.valid" >Invia</button>
       <span  class="infoSend" [hidden]="myForm.valid">Tutti i dati sono obbligatori!</span>
     </div>

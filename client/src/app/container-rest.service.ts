@@ -7,7 +7,7 @@ import { map } from 'rxjs/operators';
 @Injectable()
 export class ContainerRestService {
 
-  private endpoint = 'http://localhost:3000/jtr';
+  private endpoint = 'http://localhost:3000/api';
 
   constructor(private http: HttpClient) { }
 
@@ -31,16 +31,16 @@ export class ContainerRestService {
    * API per accesso a livello di 'elemento'
    */ 
   getContainer(name:String): Observable<Container> {
-    return this.http.get(this.endpoint+name)
+    return this.http.get(this.endpoint+'/'+name)
       .pipe( map(response => response as Container) );
   }
 
   delContainer(name:String) {
-    return this.http.delete(this.endpoint+name, {responseType: 'text'});
+    return this.http.delete(this.endpoint+'/'+name, {responseType: 'text'});
   }
 
   putContainer(name:String) {
-    return this.http.put(this.endpoint+name, {}, {responseType: 'text'});
+    return this.http.put(this.endpoint+'/'+name, {}, {responseType: 'text'});
   }
 
   postContainer(name:String, formData:FormData) {

@@ -4,20 +4,17 @@ import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ContainerComponent } from './container/container.component';
-import { ContainerListaComponent } from './container-lista/container-lista.component';
 import { ContainerFormComponent } from './container-form/container-form.component';
-import { ContainerFormGenericComponent } from './container-form-generic/container-form-generic.component';
+import { ContainerListaComponent } from './container-lista/container-lista.component';
+import { ContainerComponent } from './container/container.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ContainerComponent,
     ContainerListaComponent,
     ContainerFormComponent,
-    ContainerFormGenericComponent
+    ContainerComponent
   ],
   imports: [
     RouterModule.forRoot([
@@ -28,15 +25,10 @@ import { ContainerFormGenericComponent } from './container-form-generic/containe
       {
         path: 'nuovoContainer',
         component: ContainerFormComponent
-      },
-      {
-        path: 'nuovoContainerGenerico',
-        component: ContainerFormGenericComponent
       }
     ]),
-    HttpClientModule,
     BrowserModule,
-    AppRoutingModule,
+    HttpClientModule,
     ReactiveFormsModule
   ],
   providers: [],

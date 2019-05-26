@@ -1,21 +1,25 @@
 <div class="container">
     
-    <table>
-        <tr>
-            <td class="td1"><h3 class="containerName">{{container.Name}}</h3></td>
-            <td class="td2" style="text-align: right; font-weight: bold; color: white;">
-                <a class="btnStop" (click)="putContainer()" [hidden]="isExited">Ferma</a>
-                <a class="btnDel" (click)="delContainer()">Cancella</a>
-            </td>
-        </tr>
-        <tr>
-            <td class="td1" rowspan="2"><p>Stato del container:</p></td>
-            <td class="td2"><i class="information">{{container.State}}</i></td>
-        </tr>
-        <tr>
-            <td class="td2"><i class="information">{{container.Status}}</i></td>
-        </tr>
-    </table>               
+  <table>
+      <tr>
+          <td class="td1"><h3 style="font-weight: bold;">{{container.name}}</h3></td>
+          <td class="td2" style="text-align: right; font-weight: bold; color: white;">
+              <a class="btnStop" (click)="putContainer()" [hidden]="isExited">Ferma</a>
+              <a class="btnDel" (click)="delContainer()">Cancella</a>
+          </td>
+      </tr>
+      <tr>
+          <td class="td1">Stato del container:</td>
+          <td class="td2">
+            <i *ngIf='container.running'>running</i>
+            <i *ngIf='!container.running'>exited</i>
+          </td>
+      </tr>
+      <tr>
+          <td class="td1">Image avviata:</td>
+          <td class="td2"><i>{{container.image}}</i></td>
+      </tr>
+  </table>               
 
-    <p class="console">{{container.outConsole}}</p>
+  <p class="console">{{container.outConsole}}</p>
 </div>

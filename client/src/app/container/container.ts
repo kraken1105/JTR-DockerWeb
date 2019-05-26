@@ -1,19 +1,14 @@
 export class Container {
-	Name:String;
-	State:String;
-    Status:String;
+	name:String;
+	running:boolean;
+    image:String;
     outConsole:String;
 
-    constructor(Name:String, State:String, Status:String, outConsole:String) {
-        this.Name=Name;
-        this.State=State;
-        this.Status=Status;
+    constructor(name:String, running:boolean, image:String, outConsole:String) {
+        this.name=name;
+        this.running=running;
+        this.image=image;
         this.outConsole=outConsole;
     }
-
-    getName() { return this.Name; }
-    getState() { return this.State; }
-    getStatus() { return this.Status; }
-    getOutConsole() { return this.outConsole; }
 
 }

@@ -1,60 +1,61 @@
 
 .container {
-  padding-bottom: 1%;
-  margin-bottom: 2%;
-  border-bottom: 1px solid black;
-}
-
-/* console */
-.console {
-  margin-top: 10px;
-  white-space: pre; /* per la gestione del '\n' */
-  font-family:Courier;
-  color: rgb(230, 230, 230);
-  background: #000000;
-  border: 3px double rgb(230, 230, 230);
-  padding: 10px;
-  width: 100%;
-}
-
-/* tabella */
-table {width: 100%;}
-.td1 {width: 20%; vertical-align: middle;}
-.td2 {width: 80%;}
-
-/* btnDel */
-.btnDel {
-  background-color: red;
-  color: white;
-  padding: 10px 15px;
-  text-decoration: none;
-  text-transform: uppercase;
-  border-radius: 8px;
-  margin-left: 5px;
-}
-.btnDel:hover {
-  background-color: #ce0606;
-  cursor: pointer;
-}
-.btnDel:active {
-  background-color: #9e2525;
-}
-
-/* btnStop */
-.btnStop {
-  background-color: #ec8a00;
-  color: white;
-  padding: 10px 15px;
-  text-decoration: none;
-  text-transform: uppercase;
-  border-radius: 8px;
-  margin-left: 5px;
-}
-.btnStop:hover {
-  background-color: #cc7d0f;
-  cursor: pointer;
-}
-.btnStop:active {
-  background-color: #b4741a;
-}
-
+    padding-bottom: 1%;
+    margin-bottom: 2%;
+    border-bottom: 1px solid black;
+  }
+  
+  /* console */
+  .console {
+    margin-top: 10px;
+    white-space: pre; /* per la gestione del '\n' */
+    font-family:Courier;
+    color: rgb(230, 230, 230);
+    background: #000000;
+    border: 3px double rgb(230, 230, 230);
+    padding: 10px;
+    width: 100%;
+  }
+  
+  /* tabella */
+  table {width: 100%;}
+  .td1 {width: 20%; vertical-align: middle;}
+  .td2 {width: 80%; vertical-align: middle;}
+  
+  /* btnDel */
+  .btnDel {
+    background-color: red;
+    color: white;
+    padding: 10px 15px;
+    text-decoration: none;
+    text-transform: uppercase;
+    border-radius: 8px;
+    margin-left: 5px;
+  }
+  .btnDel:hover {
+    background-color: #ce0606;
+    cursor: pointer;
+  }
+  .btnDel:active {
+    background-color: #9e2525;
+  }
+  
+  /* btnStop */
+  .btnStop {
+    background-color: #ec8a00;
+    color: white;
+    padding: 10px 15px;
+    text-decoration: none;
+    text-transform: uppercase;
+    border-radius: 8px;
+    margin-left: 5px;
+  }
+  .btnStop:hover {
+    background-color: #cc7d0f;
+    cursor: pointer;
+  }
+  .btnStop:active {
+    background-color: #b4741a;
+  }
+  
+  

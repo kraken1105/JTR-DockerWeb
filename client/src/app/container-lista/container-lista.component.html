@@ -9,7 +9,7 @@
   <ul *ngIf="listaContainer?.length > 0">
     <li *ngFor="let container of listaContainer">
       <app-container (updateListNow)="getListaContainer()" [container]="container"></app-container>
-	  </li>
+    </li>
   </ul>
 
   <p *ngIf="listaContainer?.length == 0">Nessun container trovato. <a routerLink="/nuovoContainer">

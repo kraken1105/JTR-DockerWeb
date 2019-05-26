@@ -1,0 +1,62 @@
+{
+    "serverGlobalConfig": {
+        "in-dir": "/mount_dirs/in",
+        "out-dir": "/mount_dirs/out",
+        "downloads-dir": "/downloads",
+        "out-dir-container": "/home",
+        "to-append-cmd": "/home/out_console.txt"
+    },
+
+    "images": [
+        {
+            "name":"jtr",
+            "image":"knsit/johntheripper",
+                
+            "serverConfig": {
+                "runParams": {
+                    "detached": true,
+                    "rm": true,
+                    "in-dir-container": "/in",
+                    "out-dir-container": "/home/john"
+                },
+                "default-dir-to-copy-in-mount-in": "/mount_dirs/jtr-default-in",
+                "default-script-in": "init.sh",
+                "to-append-cmd": "/home/john/out_console.txt"
+            },
+            
+            "client-preset": {
+                "cmd-presets": [
+                    {"name":"wordlist", "cmd": "john --format=sha512crypt --wordlist=/in/password.lst /in/unshadowed"},
+                    {"name":"single crack", "cmd": "john --format=sha512crypt --single /in/unshadowed"},
+                    {"name":"incremental", "cmd": "john --format=sha512crypt --incremental /in/unshadowed"},
+                    {"name":"custom", "cmd": "john "} 
+                ],
+                "mount-in-container": "/in"
+            }
+        },
+
+        {
+            "name":"nmap",
+            "image":"instrumentisto/nmap",
+            
+            "serverConfig": {
+                "runParams": {
+                    "detached": true,
+                    "rm": true,
+                    "in-dir-container": "/in"
+                }
+            },
+            
+            "client-preset": {
+                "cmd-presets": [
+                    {"name":"scan TCP", "cmd": "nmap -v scanme.nmap.org"},
+                    {"name":"custom", "cmd": "nmap "} 
+                ]
+            }
+        },            
+
+        {
+            "name":"custom"
+        }
+    ]
+}
