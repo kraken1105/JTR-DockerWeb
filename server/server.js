@@ -1,7 +1,6 @@
 
 const express = require('express');
 const cors = require('cors');
-const Promise = require('promise');
 const bodyParser = require('body-parser');
 const fse = require('fs-extra');
 const _ = require('underscore');
@@ -22,7 +21,7 @@ const myDockerLib = require('./lib/myDockerLib');
 		const default_append_cmd = myconfig["serverGlobalConfig"]["to-append-cmd"];
 
 	console.log('Server configurato con:');
-	console.log('  server_mount_dirsserver_mount_dirs_in_out: '+server_mount_dirs_in);
+	console.log('  server_mount_dirs_in: '+server_mount_dirs_in);
 	console.log('  server_mount_dirs_out: '+server_mount_dirs_out);
 	console.log('  downloads_dir: '+downloads_dir);
 	console.log('  out_dir_container: '+out_dir_container);
@@ -234,8 +233,7 @@ app.route('/api/:name').post(multipartMiddleware, (req,res) => {
 		  	res.status(503).send('Il server non è al momento in grado di soddisfare la richiesta');
 		}   
 		else {
-			console.log(data)
-		  	console.log("    ["+Date.now()+"] container "+name+" avviato con successo");
+			console.log("    ["+Date.now()+"] container "+name+" avviato con successo");
 		  	res.status(202).send('Container avviato con successo');
 		}}, txtCmd);
 });
