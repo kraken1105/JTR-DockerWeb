@@ -26,7 +26,7 @@ Quindi installare le dipendenze del back-end ed avviarlo:
 ```
 cd server
 sudo npm install
-sudo node index.js
+sudo node server.js
 ```
 
 Allo stesso modo installare le dipendenze del front-end ed avviarlo:
